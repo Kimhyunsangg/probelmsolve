@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Selection</title>
+</head>
+<body>
+    <h1>Files in Folder</h1>
+    <form action="/chat" method="get">
+        <select name="selected_file">
+            {% for file in files %}
+                <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    <h1>File Uploader</h1>
+    <form action="/uploader" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>

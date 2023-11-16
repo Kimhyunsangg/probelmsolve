@@ -1,0 +1,71 @@
+.pointer{
+  cursor: pointer;
+}
+.minWidth-420{
+  min-width: 420x;
+}
+
+.dark{
+  background-color:black;
+  color:lightgrey;  
+}
+
+.lightDark{
+  border: 1px solid rgb(77,77,77);
+  color:lightgrey;  
+}
+.text-gray-light{
+  color: rgb(200, 200, 200);
+}
+.text-gray{
+  color: rgb(177, 177, 177);
+}
+.border-gray{
+  border-color:rgb(77,77,77) !important; 
+}
+input[type=file]::file-selector-button {
+    background-color:rgb(41, 41, 41);
+    color:lightgrey;  
+    border: 1px solid rgb(77,77,77);
+    border-radius: 4px;
+    cursor: pointer;
+   
+  }
+
+  input[type="file"]::-webkit-file-upload-button {
+    background-color: rgb(41, 41, 41);
+    color: lightgrey;
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="file"]:hover::-webkit-file-upload-button {
+    background: rgb(77, 77, 77);
+    color: #fff;
+  }
+  .inputDark{
+      background-color:black;color:lightgrey;border-color: darkgrey;border: none;border-bottom:1px solid darkgray 
+  }
+  .inputDark2{
+      background-color:rgb(41, 41, 41);color:lightgrey;border-color: darkgrey;border: none;border-bottom:1px solid darkgray 
+  }
+  .inputDark::placeholder {
+    color: darkgray;
+  }
+  .inputDark:focus { outline: none !important;color:white; background-color: rgb(100, 100, 100); box-shadow: 0 0 4px #ededed; }
+  .inputDark:focus {
+    outline: none !important;
+    color: white;
+    background-color: rgb(41, 41, 41);
+    box-shadow: 0 0 4px #ededed;
+  } 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* 아이콘을 흰색으로 */
+    
+  }
+  @media (max-width: 600px) {
+    .wdHide {
+      display: none;
+    }
+  }

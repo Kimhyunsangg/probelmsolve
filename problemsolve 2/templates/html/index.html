@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko" data-bs-theme="auto">
+<head>
+    {% include '/html/head.html' %}    
+</head>
+<style>
+    body{
+        font-family: 'Nanum Gothic'; 
+        font-size: 1.2em !important;
+    }
+    html[data-bs-theme='light'] * {
+        color: rgb(30,30, 30); /* 어두운 테마에서는 흰색 텍스트 */
+        /* background-color:rgb(244, 249, 252); */
+    }
+    html[data-bs-theme='dark'] * {
+        color: rgb(200,200, 200); /* 어두운 테마에서는 흰색 텍스트 */
+        background-color:rgb(7, 35, 55);
+    }
+    .bottom{ font-size: 0.9em }
+    @media (max-width: 500px) {
+        body { font-size: 0.85em;}
+       .form-control{ font-size: 1em !important;} 
+       .bottom{ font-size: 0.7em !important; }
+    }
+</style>
+<body>
+   
+    <div class="container mt-1">
+       <section id="menu" class="rounded-1 mt-2 bg-warning">
+            {% include '/html/menu.html' %}
+       </section> 
+       <section id="chatSetup" class="d-flex justify-content-between mt-2">
+            <div>
+                <select  id="ai_mode" onchange="setAiMode()" class="p-2 border-0">
+                    <option value="jedolGPT">jedolGPT</option>
+                    <option value="chatGPT">chatGPT</option>
+                    <!-- <option value="jshsGPT">jshsGPT</option> -->
+                </select>
+                <span>
+                    <select  id="bg-theme"  class="p-2 border-0">
+                        <option value="light">light</option>
+                        <option value="dark">dark</option>
+                    </select>
+                </span>
+            </div>  
+    
+            <div class="text-secondary fs-9 text-end ">
+                <span class="d-none d-lg-inline bottom">
+                    Token :  {{token}}
+                </span>
+            </div>
+       </section> 
+         
+        <section id="main-page"  class="card my-1">
+                <div class="card-body">
+                    <div id="chat" style="overflow-y: auto;"></div>
+                </div>
+                <div class="card-footer pe-1">
+                    <div class="d-flex">
+                        <!-- <input type="text" id="query" onkeydown="handleEnter(event)" class="form-control border-0 fs-5" value="안녕 ?" placeholder="입력하세요!"> -->
+                        <textarea id="query" onkeydown="handleEnter(event)" class="form-control border-0 fs-5" rows="1" placeholder="입력하세요!">안녕 ?</textarea>
+                        <button class="btn " onclick="send_query()">
+                            <i class="fa-solid fa-paper-plane-top"></i>
+                        </button>
+                    </div>
+                </div>
+        </section>
+           {% include '/html/bottom.html' %} 
+    </div>
+    
+</body>
+<script src="/js/function.js"></script>
+<script>
+
+function handleEnter(event) {
+
+    if (event.which === 13 && !event.shiftKey) { // Shift가 아닌 Enter만 눌렸을 때
+        event.preventDefault(); // 엔터 키의 기본 동작(새 줄 추가)을 막습니다.
+        send_query(); // 메시지 전송 함수 호출
+    } else if (event.which === 13 && event.shiftKey) {
+        var textarea = $('#query').val();
+        var lines = textarea.split("\n").length;
+            lines = lines <10 ? lines : 9 
+           $('#query').attr('rows', lines + 1); // 한 줄 추가
+    }
+}
+// AI 모드를 설정하는 함수
+function setAiMode() {
+    
+    var ai_mode = $("#ai_mode").val();
+    localStorage.setItem('ai_Mode', ai_mode); // 로컬 스토리지에 저장
+}
+function updateChatHeight() {
+    var windowHeight = $(window).height(); // 현재 윈도우 높이를 구합니다.
+    // alert(windowHeight)
+    $('#chat').height(windowHeight * 0.5); // 높이를 80%로 설정합니다.
+}
+
+$(document).ready(function() {
+    
+     // "bg-theme" select box의 값 변경 이벤트 핸들러를 설정합니다.
+     $('#bg-theme').change(function() {
+            var selectedTheme = $(this).val(); // 선택된 테마 값을 가져옵니다.
+            $('html').attr('data-bs-theme', selectedTheme); // HTML 태그에 테마 속성을 설정합니다.
+            localStorage.setItem('theme', selectedTheme); // 선택된 테마를 localStorage에 저장합니다.
+            if ( selectedTheme=="dark"){
+                    $("#menu").removeClass("bg-warning")
+                } else {
+                    $("#menu").addClass("bg-warning")
+                }
+        });
+
+        // 페이지 로딩 시 저장된 테마를 적용합니다.
+        var currentTheme = localStorage.getItem('theme'); // 저장된 테마를 가져옵니다.
+            currentTheme= currentTheme ? currentTheme:'light'
+        if (currentTheme) {
+            $('#bg-theme').val(currentTheme); // select box의 값을 설정합니다.
+            $('html').attr('data-bs-theme', currentTheme); // HTML 태그에 테마 속성을 설정합니다.
+        } 
+     
+        // if ( currentTheme=="dark"){
+        //             $("#menu").removeClass("bg-warning")
+        // } else {
+        //             $("#menu").addClass("bg-warning")
+        // }
+    var savedAiMode = localStorage.getItem('ai_Mode');
+    if (savedAiMode) { $("#ai_mode").val(savedAiMode);} 
+
+    // 윈도우 크기가 변경될 때마다 높이를 업데이트합니다.
+    $(window).resize(updateChatHeight);
+    // 초기 로딩 시에도 #chat 요소의 높이를 설정합니다.
+    updateChatHeight();
+});
+</script>
+</html>

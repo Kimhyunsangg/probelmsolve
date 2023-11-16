@@ -1,0 +1,13 @@
+pip install FAISS-cpu
+pip install langchain
+pip install openai
+pip install pypdf
+pip install chromadb
+pip install tiktoken
+pip install asyncio
+pip install --upgrade pip
+pip install --upgrade pip setuptools
+pip install python-dotenv
+pip install pdfplumber
+pip install wikipedia
+pip install transformers

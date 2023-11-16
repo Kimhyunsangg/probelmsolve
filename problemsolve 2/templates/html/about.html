@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    {% include 'html/head.html' %}
+
+</head>
+
+<body>
+  
+  <div class="container mt-2">
+    <section id="menu" class="rounded-1">
+         {% include '/html/menu.html' %}
+    </section> 
+    
+    <section id="main-page2" class="container my-5">
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <div class="card" style="width: 100%;"> <!-- width: 100% ensures it fills the parent column -->
+            <img src="/images/jss0.png" class="card-img-top" style="height:18rem">
+            <div class="card-body">
+              <p class="card-text py-3">
+                인공지능 기초과목의 수행평가로 제작되고 있는 학교안내 쳇봇 제돌이 입니다.<br>
+                제돌이는 현재 학교연혁, 학사일정, 점심 메뉴 등이 학습되어 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card" style="width: 100%;">
+            <img src="/images/jss1.png" class="card-img-top" style="height:18rem">
+            <div class="card-body">
+              <p class="card-text py-3">
+                I am Jedol, a school information chatbot being developed as a performance assessment for a basic course in artificial intelligence.<br>
+                Jedol is currently trained on the school history, academic calendar, and lunch menu."
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card" style="width: 100%;">
+            <img src="/images/jss2.png" class="card-img-top" style="height:18rem">
+            <div class="card-body ">
+              <p class="card-text py-3">
+                これは人工知能の基礎科目の成績評価として制作されている学校案内チャットボットのジェドゥリです。<br>
+                ジェドゥリは現在、学校の歴史、学術カレンダー、ランチメニューなどを学習しています。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include 'html/bottom.html' %}
+ </div>
+
+
+    
+</body>
+<script src="/js/function.js"></script>
+<script src="/js/theme-color.js"></script>
+</html>
